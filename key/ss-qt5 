@@ -1,0 +1,15 @@
+shadowsocks-qt5 需要通过PPA源安装，仅支持Ubuntu 14.04或更高版本。 
+1、设置 PPA 源并安装 shadowsocks-qt5
+
+ 
+$ sudo add-apt-repository ppa:hzwhuang/ss-qt5
+$ sudo apt-get update
+$ sudo apt-get install shadowsocks-qt5
+
+
+2、安装过程遇到 libappindicator1 依赖问题（dependency problems），而 libappindicator1 又遇到 libindicator7 依赖的解决办法。一并安装 libappindicator1 libindicator7 依赖，再重新安装 shadowsocks-qt5。
+
+ 
+$ sudo apt-get -f install libappindicator1 libindicator7
+ 
+3、完成后就可以打开 shadowsocks-qt5 啦 
