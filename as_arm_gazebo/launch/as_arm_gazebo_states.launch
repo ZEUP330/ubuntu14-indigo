@@ -1,0 +1,23 @@
+<launch>
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find as_arm_gazebo)/config/as_arm_joint_states.yaml" command="load"/>
+
+
+    <node name="joint_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/as_arm" args="joint_state_controller"/>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+          respawn="false" output="screen">
+        <remap from="/joint_states" to="/as_arm/joint_states"/>
+    </node>
+
+    <node name="arm_image_view" pkg="image_view" type="image_view" respawn="false"
+          output="screen" args="image:=/camera/image_raw"/>
+
+    <node name="arm_image_view_y" pkg="image_view" type="image_view" respawn="false"
+          output="screen" args="image:=/camera_y/image_raw"/>
+
+</launch>
+
+
